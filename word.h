@@ -17,7 +17,7 @@ public:
 	Word(const string word);
 	string get_word();
 	list* get_files();
-	void insert(const string word, const string fname);
+	void insert(const string word, string* fname);
 private:
 	string word;
 	list* data;
@@ -62,8 +62,8 @@ class wordLink
 public:
 	wordLink();
 	void appendWord(const Word* data_f);
-	NodeWord*head(){return head_f;}
-	NodeWord*tail(){return tail_f;}
+	NodeWord* head(){return head_f;}
+	NodeWord* tail(){return tail_f;}
 private:
 	NodeWord* head_f;
 	NodeWord* tail_f;

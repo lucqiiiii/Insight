@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
         NodeWord* cursor = wordList->head();
         while(cursor){
           if(cursor->data().get_word() == word){
-            cursor->data().get_files()->appendFile(files[i]);
+            cursor->data().get_files()->appendFile(&files[i]);
             break;
           }
           cursor = cursor->next();
@@ -74,7 +74,7 @@ int main(int argc, char* argv[])
         
         if(cursor == NULL){
           Word* addWord = new Word(word);
-          addWord->get_files()->appendFile(files[i]);
+          addWord->get_files()->appendFile(&files[i]);
           wordList->appendWord(addWord);
         }
   // Now the string "word" holds the keyword, and the string "files[i]" holds the document name.
@@ -103,15 +103,14 @@ int main(int argc, char* argv[])
 
     NodeWord* wordCursor = wordList->head();
     while(wordCursor != NULL){
-      cout<<wordCursor->data().get_word()<<endl;
+      //<<wordCursor->data().get_word()<<endl;
       if(wordCursor->data().get_word() == inputWord){
-        NodeList* getFileList = wordCursor->data().get_files()->head();
+        node* getFileList = wordCursor->data().get_files()->head();
         while(getFileList!=NULL){
           if(getFileList->data()->count() >= threshold){
             count++;
             cout<<"File: "<<getFileList->data()->fileName()<<"; Count: "<<getFileList->data()->count()<<endl; 
           }
-          // cout<< getFileList->data()->fileName();
           getFileList = getFileList ->next();
         }
       }

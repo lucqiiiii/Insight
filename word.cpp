@@ -23,7 +23,7 @@ list* Word::get_files(){
 	return data;
 }
 
-void Word::insert(const string word, const string fname){
+void Word::insert(const string word, string* fname){
 	this->word = word;
 	data->appendFile(fname);
 }

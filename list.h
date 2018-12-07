@@ -1,3 +1,7 @@
+//Luis Valdivia
+//December 4, 2018
+//list.h
+
 #ifndef LIST_H
 #define LIST_H
 #include "itemtype.h"
@@ -8,11 +12,11 @@
 
 using namespace std;
 
-struct NodeList
+struct node
 {
 public:
 
-    NodeList(File* d, NodeList* l=NULL, NodeList* p=NULL)
+    node(File* d, node* l=NULL, node* p=NULL)
     {
         data_f = d;
         next_f = l;
@@ -22,39 +26,57 @@ public:
     //modifiers
 
     void set_data(File* d) {data_f = d;}
-    void set_next(NodeList* l) {next_f = l;}
-    void set_prev(NodeList* p) {prev_f = p;}
+    void set_next(node* l) {next_f = l;}
+    void set_prev(node* p) {prev_f = p;}
 
     // observers
     File* data() const {return data_f;}
 
     // forward links
-    NodeList* next() {return next_f;}
-    const NodeList* next() const {return next_f;}
+    node* next() {return next_f;}
+    const node* next() const {return next_f;}
 
     // backward links
-    NodeList* prev() {return prev_f;}
-    const NodeList* prev() const {return prev_f;}
+    node* prev() {return prev_f;}
+    const node* prev() const {return prev_f;}
 
 private:
     File* data_f;
     // forward pointer
-    NodeList* next_f;
+    node* next_f;
     // backward pointer
-    NodeList* prev_f;
+    node* prev_f;
 };
 
 class list
 {
-public:
+public: 
+    //constructors 
     list();
-    void appendFile(const string &fname);
-    NodeList* head(){return head_f;}
-    NodeList* tail(){return tail_f;}
-    ~list();
-private:
-    NodeList* head_f;
-    NodeList* tail_f;
-};
-#endif
 
+    //modifier 
+    void append_File(string* fname);
+    void appendFile(string* fname);
+    
+    //sorting functions
+    static node* splitFile(node* head);
+    static node* mergeFile(node* first, node* second);
+    node* mergeSortFile(node* head);
+
+    //observer
+    node* head(){return head_f;}
+    node* tail(){return tail_f;}
+
+    //deconstructor 
+    ~list();
+
+private: 
+	node* head_f;
+	node* tail_f;
+};
+
+bool not_in_list(string filename, node* head);
+
+void print_list(node* head);
+
+#endif 
